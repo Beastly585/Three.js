@@ -1,19 +1,19 @@
 import { defineConfig } from 'vite';
-import staticSite from 'vite-plugin-static-site';
+import restart from 'vite-plugin-restart';
 
 export default defineConfig({
-    root: 'src/', // Keep 'src' as the root for the Vite server
-    publicDir: '../static/', // Ensure Vite serves static files from the 'static' directory
-    base: '/<REPO_NAME>/', // Set this to your GitHub repository name
+    root: 'src/', // Keep 'src' as the root directory
+    publicDir: '../static/', // Static assets directory
+    base: '/Three.js/', // Replace <REPO_NAME> with your GitHub repo name
     server: {
-        host: true, // Allows access from the local network
-        open: !('SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env) // Opens browser unless on sandbox
+        host: true, // Allow network access
+        open: !('SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env) // Open browser unless in sandbox
     },
     build: {
-        outDir: '../docs', // Outputs the build to the 'docs' folder for GitHub Pages
-        emptyOutDir: true, // Clears out any old files in the output directory
+        outDir: '../docs', // Output to 'docs' for GitHub Pages
+        emptyOutDir: true, // Clears old files
     },
     plugins: [
-        restart({ restart: ['../static/**'] }) // Monitors changes in the 'static' folder
+        restart({ restart: ['../static/**'] }) // Monitor changes in static folder
     ],
 });
